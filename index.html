@@ -8,7 +8,20 @@
     <h1 id="title">Mokepon! 🔥🌱💧</h1>
     <section id="selectionPet">
         <h2>Elige tu Mascota: </h2>
+            <label for="Hipodoge">
+                <h3>Hipodoge</h3>
+                <p>Ataques de Agua💧 <input type="radio" name="pet" id="Hipodoge"></p>
+            </label>
+            <label for="Capipepo">
+                <h3>Capipepo</h3>
+                <p>Ataques de Tierra🌱 <input type="radio" name="pet" id="Capipepo"></p>
+            </label>
+            <label for="Ratigueya">
+                <h3>Ratigueya</h3>
+                <p>Ataques de Fuego🔥 <input type="radio" name="pet" id="Ratigueya"></p>
+            </label>
 
+            <input type="button" value="select">
     </section>
     <section id="selectAttack">
         <h2>Elige tu Ataque: </h2>
@@ -20,5 +33,12 @@
             <button id="attackDirt">Tierra 🌱</button>
         </p>
     </section>
+    <section id="messages">
+        <p>tu mascota ataco con fuego, el enemigo ataco con tierra. GANASTE 🎉</p>
+    </section>
+    <section id="restart">
+        <input type="button" value="restart">
+    </section>
+    <script src="./Js/indexGame.js"></script>
 </body>
 </html>
