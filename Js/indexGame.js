@@ -220,11 +220,11 @@ function GameExe(){
         gameState.innerHTML = `turno de ${computer.name}`;
         turn = true;
         if (computer.pet.life < 0){
-            alert(`${player.name} gana el combate!`);
             buttons.btnFire.removeEventListener("click", btnAttackTypes.btnFire);
             buttons.btnDirt.removeEventListener("click", btnAttackTypes.btnDirt);
             buttons.btnWater.removeEventListener("click", btnAttackTypes.btnWater);
             spanLifePet.innerHTML = 0;
+            gameState.innerHTML = `${player.name} gana el combate!`;
             winner = player.name;
         }
     }else if (turn){
@@ -239,11 +239,11 @@ function GameExe(){
         gameState.innerHTML = `turno de ${player.name}`;
         turn = false;
         if (player.pet.life < 0){
-            alert(`${computer.name} gana el combate!`);
             buttons.btnFire.removeEventListener("click", btnAttackTypes.btnFire);
             buttons.btnDirt.removeEventListener("click", btnAttackTypes.btnDirt);
             buttons.btnWater.removeEventListener("click", btnAttackTypes.btnWater);
             spanLifePet.innerHTML = 0;
+            gameState.innerHTML = `${computer.name} gana el combate!`;
             winner = computer.name;
         }
     }
