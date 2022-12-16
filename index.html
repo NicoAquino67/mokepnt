@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Mokepon</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Mokepon</title>
+        <script defer src="./Js/indexGame.js"></script>
+    </head>
 <body>
     <h1 id="title">Mokepon! 🔥🌱💧</h1>
     <section id="selectionPet">
         <h2>Elige tu Mascota: </h2>
+        
             <label for="Hipodoge">
                 <h3>Hipodoge</h3>
-                <p>Ataques de Agua💧 <input type="radio" name="pet" id="Hipodoge"></p>
+                <p>Ataques de Fuego🔥 <input type="radio" name="pet" id="Hipodoge"></p>
             </label>
             <label for="Capipepo">
                 <h3>Capipepo</h3>
@@ -18,27 +20,29 @@
             </label>
             <label for="Ratigueya">
                 <h3>Ratigueya</h3>
-                <p>Ataques de Fuego🔥 <input type="radio" name="pet" id="Ratigueya"></p>
+                <p>Ataques de Agua💧<input type="radio" name="pet" id="Ratigueya"></p>
             </label>
-
-            <input type="button" value="select">
+            
+            <input type="button" id="selecttButton" value="select">
     </section>
     <section id="selectAttack">
         <h2>Elige tu Ataque: </h2>
-        <p>Tu mascota tiene <span id="lifePlayer">3</span> vidas</p>
-        <p>La mascota del enemigo tiene <span id="lifeEnemy">3</span> vidas</p>
+        <p><span id="petPlayer">Tu mascota</span> tiene <span id="lifePlayer">3</span> puntos de vida</p>
+        <p><span id="petEnemy">La mascota del enemigo</span> tiene <span id="lifeEnemy">3</span> puntos de vida</p>
         <p class="buttons">
             <button id="attackFire">Fuego 🔥</button>
-            <button id="attackWater">Agua 💧</button>
             <button id="attackDirt">Tierra 🌱</button>
+            <button id="attackWater">Agua 💧</button>
         </p>
     </section>
     <section id="messages">
-        <p>tu mascota ataco con fuego, el enemigo ataco con tierra. GANASTE 🎉</p>
+        <p> <span id="playerMessage"></span>. <br>
+            <span id="computerMessage"></span>. <br>
+            <span id="gameState"></span>.
+        </p>
     </section>
     <section id="restart">
-        <input type="button" value="restart">
+        <input type="button" id="restartButton" value="restart">
     </section>
-    <script src="./Js/indexGame.js"></script>
 </body>
 </html>
