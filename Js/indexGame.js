@@ -253,6 +253,10 @@ function GameExe(){
 
 buttons.restart.addEventListener("click", RestartGame);
 function RestartGame(){
+    let messagePlayer = document.getElementById("playerMessage");
+    let messageComputer = document.getElementById("computerMessage");
+    let gameState = document.getElementById("gameState");
+    //ToDo: borrar los mensajes una vez reiniciado el juego 
     petInput.capipepo.checked = false;
     petInput.ratigueya.checked = false;
     petInput.hipodoge.checked = false;
@@ -260,6 +264,7 @@ function RestartGame(){
     hipodoge.life = 130;
     capipepo.life = 200;
     ratigueya.life = 150;
+
     if (winner == player.name){
         player.exp += computer.pet.exp;
         winner = undefined;
@@ -267,3 +272,4 @@ function RestartGame(){
         player.exp -= player.exp * 0.3;
     }
 }
+//ToDo: mostrar la experiencia del jugador, experiencia ganada en cada combate, y crear una interfaz visual que no sea solo texto y botones
