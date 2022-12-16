@@ -107,18 +107,21 @@ let btnAttackTypes = {
         attackSelect = 'fire';
         attackType = 'Fuego';
         AttackType();
+        RandomAttackType();
         GameExe();
     },
     btnDirt: () => {
         attackSelect = 'dirt';
         attackType = 'Tierra';
         AttackType();
+        RandomAttackType();
         GameExe();
     },
     btnWater: () => {
         attackSelect = 'water';
         attackType = 'Agua'
         AttackType();
+        RandomAttackType();
         GameExe();
     }
 }
@@ -229,7 +232,6 @@ function GameExe(){
         }
     }else if (turn){
         //console.log("turno del Pc");
-        RandomAttackType();
         computer.pet.attackDmg = attackDmg;
         console.log('turno del pc');
         player.pet.life -= computer.pet.attackDmg;
