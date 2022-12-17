@@ -1,27 +1,38 @@
+//buttons asigns
 let buttons = {
     select: document.getElementById("selecttButton"),
     restart: document.getElementById("restartButton"),
+    submit: document.getElementById("submitBtn"),
     btnFire: document.getElementById("attackFire"),
     btnDirt: document.getElementById("attackDirt"),
     btnWater: document.getElementById("attackWater")
 }
-
+//selection pet
 let petInput = {
     hipodoge: document.getElementById("Hipodoge"),
     capipepo: document.getElementById("Capipepo"),
     ratigueya: document.getElementById("Ratigueya"),
 }
-
+let inputUserData = { 
+    trainerName: document.getElementById("InputPlayerName")
+}
+//PlayersObjects
 const player = {
-    name: "Ash",
+    name:'',
     exp: 0
 }
+//execute the arrow function to asign the value in the player.name
+const namePlayer = () => { 
+    player.name = inputUserData.trainerName.value;
+}
+buttons.submit.addEventListener("click", namePlayer);
 
 const computer = {
     name: "Bash",
     exp: 0
 }
 
+//PetObjects
 const hipodoge = {
     name: "Hipodoge",
     exp: 13,
@@ -35,7 +46,7 @@ const capipepo = {
     life: 200,
     attackType: "dirt",
     attackDmg: 13
-    }
+}
 const ratigueya = {
     name: "Ratigueya",
     exp: 15,
@@ -43,27 +54,44 @@ const ratigueya = {
     attackType: "water",
     attackDmg: 15
 }
-    
+
+//create messages in the section
+let sectionMessages = document.getElementById("messages");
+function CreateMessages(contentMessage){
+    let newMessage = document.createElement('p');
+    sectionMessages.appendChild(newMessage);
+    newMessage.innerHTML = contentMessage;
+    DeleteMessages();
+}
+
+//ToDo: delete messages when the section its full
+function DeleteMessages(){
+    //.....
+}
+
+//return a random number with a min and max limits
 function randomNum(min, max){
     num = Math.floor(Math.random() * (max - min + 1) + min);
     return num
 }
 
+//selection of the pets
 buttons.select.addEventListener("click", SelectPet);
 function SelectPet(){
+    //logic selection, look what is the inputRadio selected and append the petObject to the playerObject
     if (petInput.hipodoge.checked){
         player.pet = hipodoge;
-        alert("inteligente, hipodogue es...");
+        CreateMessages("inteligente, hipodogue es...");
     } else if (petInput.capipepo.checked){
         player.pet = capipepo;
-        alert("un fiel amigo Capipepo es...");
+        CreateMessages("un fiel amigo Capipepo es...");
     } else if (petInput.ratigueya.checked){
         player.pet = ratigueya;
-        alert("Ratigueya buena compañia es...");
+        CreateMessages("Ratigueya buena compañia es...");
     } else {
-        alert("una mascota, seleccionar debes...");
+        CreateMessages("una mascota, seleccionar debes...");
     }
-    
+    //update the life points for the player pets selected
     if (player.hasOwnProperty("pet")){
         let spanPet = document.getElementById("petPlayer");
         let spanLifePet = document.getElementById("lifePlayer");
@@ -74,6 +102,7 @@ function SelectPet(){
     let spanPet = document.getElementById("petEnemy");
     let spanLifePet = document.getElementById("lifeEnemy");
 
+    //pick a random Pet for the computer
     switch (randomNum(1,3)) {
         case 1 :
             computer.pet = hipodoge;
@@ -91,16 +120,17 @@ function SelectPet(){
             spanLifePet.innerHTML = computer.pet.life;
         break             
     }
-    
+    //append the event listener for the attack buttons
     buttons.btnFire.addEventListener("click", btnAttackTypes.btnFire);
     buttons.btnDirt.addEventListener("click", btnAttackTypes.btnDirt);
     buttons.btnWater.addEventListener("click", btnAttackTypes.btnWater);
 }
+//game Logic
 let attackSelect;
 let attackType;
 let attackDmg;
 let criticDmg;
-//false is computer, true is user
+//false is user, true is computer
 let turn = false;
 let btnAttackTypes = {
     btnFire: () => {
@@ -125,10 +155,8 @@ let btnAttackTypes = {
         GameExe();
     }
 }
-buttons.btnFire.addEventListener("click", btnAttackTypes.btnFire);
-buttons.btnDirt.addEventListener("click", btnAttackTypes.btnDirt);
-buttons.btnWater.addEventListener("click", btnAttackTypes.btnWater);
 
+//pick a random attack for the computer
 function RandomAttackType(){
     switch (randomNum(1,4)){
         case 1: 
@@ -209,43 +237,46 @@ function AttackType(){
 
 let winner;
 function GameExe(){
-    let messagePlayer = document.getElementById("playerMessage");
-    let messageComputer = document.getElementById("computerMessage");
-    let gameState = document.getElementById("gameState");
     if(!turn){
         //console.log("turno del Jugador");
         let spanLifePet = document.getElementById("lifeEnemy");
         player.pet.attackDmg = attackDmg;
-        console.log('turno del jugador');
         computer.pet.life -= player.pet.attackDmg;
         spanLifePet.innerHTML = computer.pet.life;
-        messagePlayer.innerHTML = `${player.name} ataca con ${attackType}`;
-        gameState.innerHTML = `turno de ${computer.name}`;
+        CreateMessages(`${player.name} ataca con ${attackType}`);
+        if (criticDmg){
+            CreateMessages(`Es un ataque critico!`);
+        }
+        CreateMessages(`${player.name} inflinge ${attackDmg} de daño a ${computer.pet.name}`);
+        CreateMessages(`turno de ${computer.name}`);
         turn = true;
         if (computer.pet.life < 0){
             buttons.btnFire.removeEventListener("click", btnAttackTypes.btnFire);
             buttons.btnDirt.removeEventListener("click", btnAttackTypes.btnDirt);
             buttons.btnWater.removeEventListener("click", btnAttackTypes.btnWater);
             spanLifePet.innerHTML = 0;
-            gameState.innerHTML = `${player.name} gana el combate!`;
+            CreateMessages(`${player.name} gana el combate!`);
             winner = player.name;
         }
     }else if (turn){
         //console.log("turno del Pc");
-        computer.pet.attackDmg = attackDmg;
-        console.log('turno del pc');
-        player.pet.life -= computer.pet.attackDmg;
         let spanLifePet = document.getElementById("lifePlayer");
+        computer.pet.attackDmg = attackDmg;
+        player.pet.life -= computer.pet.attackDmg;
         spanLifePet.innerHTML = player.pet.life;
-        messageComputer.innerHTML = `${computer.name} ataca con ${attackType}`;
-        gameState.innerHTML = `turno de ${player.name}`;
+        CreateMessages(`${computer.name} ataca con ${attackType}`);
+        if (criticDmg){
+            CreateMessages(`Es un ataque critico!`);
+        }
+        CreateMessages(`${computer.name} inflinge ${attackDmg} de daño a ${computer.pet.name}`);
+        CreateMessages(`turno de ${player.name}`);
         turn = false;
         if (player.pet.life < 0){
             buttons.btnFire.removeEventListener("click", btnAttackTypes.btnFire);
             buttons.btnDirt.removeEventListener("click", btnAttackTypes.btnDirt);
             buttons.btnWater.removeEventListener("click", btnAttackTypes.btnWater);
             spanLifePet.innerHTML = 0;
-            gameState.innerHTML = `${computer.name} gana el combate!`;
+            CreateMessages(`${computer.name} gana el combate!`);
             winner = computer.name;
         }
     }
@@ -253,10 +284,6 @@ function GameExe(){
 
 buttons.restart.addEventListener("click", RestartGame);
 function RestartGame(){
-    let messagePlayer = document.getElementById("playerMessage");
-    let messageComputer = document.getElementById("computerMessage");
-    let gameState = document.getElementById("gameState");
-    //ToDo: borrar los mensajes una vez reiniciado el juego 
     petInput.capipepo.checked = false;
     petInput.ratigueya.checked = false;
     petInput.hipodoge.checked = false;

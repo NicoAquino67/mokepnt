@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    position: absolute;
+    padding: 5px;
+    top: 20%;
+    left: 20%;
+    display: grid;
+    grid-template-columns: 200px 200px 250px;
+    grid-template-rows: 50px 200px 130px;
+    grid-template-areas:   
+        "header          header         header" 
+        "PlayerInfo      PetSelection   PetCombat"
+        "AttackSelection Messages       Restart" ;
+    background-color: #8EC5FC;
+    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+    border: #E0C3FC solid 3px;
+    border-radius: 10px;
+}
+
+#gameDescription{
+    display:flex;
+    grid-area: header;
+    align-items: center;
+    justify-content: space-around;
+}
+#playersInfo{
+    grid-area: PlayerInfo;
+}
+#selectionPet{
+    grid-area: PetSelection;
+}
+#combatArea{
+    grid-area: PetCombat;
+}
+#selectAttack{
+    grid-area: AttackSelection;
+}
+#messages{
+    grid-area: Messages;
+}
+#restart{
+    grid-area: Restart;
+}

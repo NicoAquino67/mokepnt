@@ -3,32 +3,52 @@
     <head>
         <meta charset="UTF-8">
         <title>Mokepon</title>
+        <link rel="stylesheet" href=".\index.css">
         <script defer src="./Js/indexGame.js"></script>
     </head>
 <body>
-    <h1 id="title">Mokepon! 🔥🌱💧</h1>
+    <header id="gameDescription">
+        <h1 id="title">Mokepon! 🔥🌱💧</h1>
+        <label for="playerName">
+            Nombre del Entrenador: 
+            <input type="text" name="playerName" placeholder="Ash" id="InputPlayerName">
+            <button id="submitBtn" type="submit">Listo para Pelear</button>
+        </label>
+    </header>
+    <section id="playersInfo">
+        <div id="player1">
+            <h3>Nombre del Entrenador: </h3>
+            <h4 id="PlayerName"></h4>
+            <h4>Experiencia: </h4>
+            <p id="playerExp"></p>
+            <h4>Nombre de la Mascota: </h4>
+            <h4 id="playerPetName"></h4>
+            <h4>Puntos vitales: </h4>
+            <p id="playerPetLife"></p>
+        </div>
+    </section>
     <section id="selectionPet">
-        <h2>Elige tu Mascota: </h2>
-        
-            <label for="Hipodoge">
-                <h3>Hipodoge</h3>
-                <p>Ataques de Fuego🔥 <input type="radio" name="pet" id="Hipodoge"></p>
-            </label>
-            <label for="Capipepo">
-                <h3>Capipepo</h3>
-                <p>Ataques de Tierra🌱 <input type="radio" name="pet" id="Capipepo"></p>
-            </label>
-            <label for="Ratigueya">
-                <h3>Ratigueya</h3>
-                <p>Ataques de Agua💧<input type="radio" name="pet" id="Ratigueya"></p>
-            </label>
-            
-            <input type="button" id="selecttButton" value="select">
+        <label for="Hipodoge">
+            <h2>Elige tu Mascota: </h2>
+            <h3>Hipodoge</h3>
+            <p>Ataques de Fuego🔥 <input type="radio" name="pet" id="Hipodoge"></p>
+        </label>
+        <label for="Capipepo">
+            <h3>Capipepo</h3>
+            <p>Ataques de Tierra🌱 <input type="radio" name="pet" id="Capipepo"></p>
+        </label>
+        <label for="Ratigueya">
+            <h3>Ratigueya</h3>
+            <p>Ataques de Agua💧<input type="radio" name="pet" id="Ratigueya"></p>
+        </label>
+        <input type="button" id="selecttButton" value="select">
+    </section>
+    <section id="combatArea">
+        <canvas width="250" height="200" id="PetsCombatArea">
+        </canvas>
     </section>
     <section id="selectAttack">
         <h2>Elige tu Ataque: </h2>
-        <p><span id="petPlayer">Tu mascota</span> tiene <span id="lifePlayer">3</span> puntos de vida</p>
-        <p><span id="petEnemy">La mascota del enemigo</span> tiene <span id="lifeEnemy">3</span> puntos de vida</p>
         <p class="buttons">
             <button id="attackFire">Fuego 🔥</button>
             <button id="attackDirt">Tierra 🌱</button>
@@ -36,10 +56,12 @@
         </p>
     </section>
     <section id="messages">
-        <p> <span id="playerMessage"></span>. <br>
-            <span id="computerMessage"></span>. <br>
-            <span id="gameState"></span>.
+        <p id="playerMessage" hidden>
+            <span id="petPlayer">Tu mascota</span> tiene <span id="lifePlayer">3</span> puntos de vida
         </p>
+        <p id="computerMessage" hidden>
+            <span id="petEnemy">La mascota del enemigo</span> tiene <span id="lifeEnemy">3</span> puntos de vida
+        </p> 
     </section>
     <section id="restart">
         <input type="button" id="restartButton" value="restart">
